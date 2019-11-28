@@ -1,0 +1,225 @@
+在normal模式下：(插入)
+    a：在词后插入
+    i：在词前插入
+    o：在新一行插入
+    A：在行最后插入
+    I：在行最前插入
+    O：在上一行插入
+
+NEOvim的分屏：
+    :vs  横分屏
+    :sp  竖分屏
+
+文本的选择：(normal模式下)
+    v       ：选一个
+    V       ：选一行
+    ctrl+v  ：选一块
+
+在Insert模式下：(在终端下也适用)
+    ctrl+h 删除一个字母
+    ctrl+w 删除一个单词
+    ctrl+u 删除一行
+
+在终端下使用：
+    ctrl+a 快速移动到开头
+    ctrl+e 快速移动到结尾
+    ctrl+b 往前移动一位
+    ctrl+f 往后移动一位
+
+在insert与normal在进行切换：
+    ctrl+c或者ctrl+[  代替  Esc
+    gi  快速进入最后一次编辑的地方并进入插入模式
+
+VIM的移动：
+    h   左
+    j   下
+    k   上
+    l   右
+    w/W 移动到下一个单词开头
+    e/E 移动到下一个单词结尾
+    b/B 移动到上一个单词开头
+    (大小写的区别是：小写以非空白分割、大写以空白分割)
+
+行间搜索：
+    f+字母(光标移动到光标所在的那一行的字母上，通常光标在行首)  使用逗号跳转到上一行想要搜索的字母，使用分号跳转到下一行想要搜索的字母
+    t+字母(光标移动到光标所在行的前一个字母上)
+    F+字母(光标移动到光标所在的那一行的字母上，通常光标在行末)
+
+VIM的水平移动：
+    0   移动到行首第一个字符(常用)
+    ^   移动到第一个非空白字符
+    $   移动到行尾(常用)
+    g_  移动到行尾非空白字符
+
+VIM的垂直移动：
+    使用小括号()在句子之间移动，用:help(    来查看帮助
+    使用大括号{}在段落之间移动
+
+VIM页面移动：
+    gg/G    移动到文件开头和结尾，使用ctrl+o 快速返回
+    H/M/L   跳转到屏幕的开头、中间、结尾
+    ctrl+u  向上翻页
+    ctrl+f  向下翻页
+    zz      把当前行放到屏幕中间
+
+Vim快速删除：
+    在normal下使用x快速删除一个字符
+    使用d来删除：
+        d a w(delete a word)删除一个单词包括空格
+        d i w(delete a word)删除一个单词不包括空格
+        dd 删除一行
+        d t (   删除括号的内容
+        d t "   删除双引号中间的内容
+        d $     删除到行尾
+        d $     删除开头
+        d 0     快速删除光标到开头
+        （数字+命令进行防止多个操作）
+        2dd     将两行都删除
+        4x      删除四个字符
+文本的替换：
+    s   删除一个字符并进入插入模式
+    R   替换文本内容
+    S   删除一整行文本并进入插入模式
+    4s  删除四个字符并进入插入模式
+    c   删除一个字符并进入插入模式
+    caw 删除一个单词并进入插入模式
+    ctw 删除双引号里面的内容并进入插入模式
+
+不会使用某一个命令时用  :help 字符
+
+VIM查询：
+    /查询内容   按回车
+        n   移动到下一个匹配
+        N   移动到上一个匹配
+    *   进行上一个单词的匹配
+    #   进行下一个单词的匹配
+
+VIM进行搜索替换：
+    基本的格式是：:[raange]s[nbstitute]/{pattern}/{string}/[flags]
+    %   表示全局
+    g   全局替换
+    s   表示替换的意思
+
+        举个例子：将全文的self改称this
+            :% s/self/this/g
+        再举个例子：查询1到6行self出现的次数
+                 :1,6 s/self//n
+    当用 :% s/self/this/g 命令时，文本中的是单词一部分的self也会被替换
+    所以要只替换self这个单词要用正则表达式  :% s/<self\>/this/g
+    <self\>就是正则表达式
+
+VIM多文件操作：
+    :ls 列举当前缓冲区
+    :b n    跳到第n个缓冲区
+    :bpre   跳到前一个缓冲区
+    :bnext  跳到后一个缓冲区
+    :bfirst 跳到第一个缓冲区
+    :blast  跳到最后一个缓冲区
+    :b 文件名   跳到该文件名的缓冲区
+    :e 文件名   打开该文件名并添加到缓冲区
+
+Vim窗口：
+    ctrl w v或者:vs  横分屏
+    ctrl w s或者:sp  竖分屏
+    ctrl w w    窗口间循环切换
+    ctrl w h    切换到左边的窗口
+    ctrl w j    切换到下边的窗口
+    ctrl w k    切换到上边的窗口
+    ctrl w l    切换到右边的窗口
+    :q  退出窗口
+
+    窗口调整(不常用的)：
+        ctrl w =      所有窗口等宽、等高
+        ctrl w _      最大化活动窗口的高度
+        ctrl w |      最大化活动窗口的宽度
+        N ctrl w _    把活动窗口的高度设为N
+        N ctrl w |    把活动窗口的宽度设为N
+
+Tab将文件分组：（并不常用）
+    :tabe[dit]{filename}    在新的标签页中打开{filename}
+    ctrl w T                把当前窗口移动到一个新的标签
+    :tabc[lose]             关闭当前标签及其中所有窗口
+    :tabo[nly]              只保留活动标签，关闭其他标签
+    :tabe[ext]{N}   {N}gt   切换到N标签
+    :tabe[ext]      gt      切换到下一个标签
+    :tabp[revious]  gT      切换到上一个标签
+
+文本对象:
+    iw      表示inner word 选中当前的单词
+    aw      表示arround word 选中当前的单词与空格
+    viw     选中当前的单词
+    vaw     选中当前的单词与空格
+    vi"     选中双引号中间的内容    x   删除
+    ci"     删除双引号中间的内容并进入插入模式
+    ci{     删除大阔号中间的内容并进入插入模式
+	ci(     删除小阔号中间的内容并进入插入模式
+
+VIM在normal中进行复制粘贴：
+	y	复制
+	p	粘贴
+	v	选择复制的地方（用p粘贴）
+	yiw	复制一个单词
+	yy	复制一行
+	dd	删除一行+	p	复制	（这个命令可用）
+
+VIM在insert下进行复制粘贴：
+	粘贴的代码格式混乱用：
+		:set paste和:set nopaste
+	x 删除一个字符+	p 粘贴（字母的对调）
+	"{寄存器名} 指定寄存器，默认为无名寄存器
+	"ayiw	复制一个单词到a寄存器里
+	"bdd	删除一行到b寄存器里
+	:reg a	查看a寄存器里的内容
+	"+		可以将剪切板中的内容加到文件中
+
+VIM的宏：
+	使用q来开始录制，使用q来结束录制
+	使用@a来回放宏（刚刚录制的过程）
+	将所有的要操作的内容选中输入	normal @a
+
+命令的补全：
+	Ctrl n			普通关键字
+	Ctrl x Ctrl n	当前缓冲区关键字
+	Ctrl x Ctrl i	包含文件关键字
+	Ctrl x Ctrl ]	标签文件关键字
+	Ctrl x Ctrl k	字典查找
+	Ctrl x Ctrl l	整行补全
+	Ctrl x Ctrl f	文件名补全(常用)
+	Ctrl x Ctrl o	全能补全(常用)
+	Ctrl n Ctrl p	补全单词(常用)
+
+VIM的展开与折叠：
+	zo	展开
+	zc	折叠
+
+Vim的映射：
+	基本的映射是在noremal下的（还有其他的映射）
+	map可以实现映射
+		例如	:map - x	减号就会删除字符
+				:map <space> viw 按下空格选中整个单词
+				:map <c-d> dd 用Ctrl d删除一行
+
+	在insert/normal/visual都可以定义映射：
+		nmap/vmap/imap定义映射只在normalvisual/insert下起作用
+		:vmap \ U	把Visual模式下的文本转换大小写
+
+	VIM提供了非递归映射：
+		nnoremap/vnoremap/inoremap在normalvisual/insert下的非递归映射
+
+
+《书籍推荐：苯方法学习VIMSCRIPT》
+《Practial vim》
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
