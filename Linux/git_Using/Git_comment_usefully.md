@@ -7,6 +7,11 @@
 
 ```bash
 git add .
+git commit -m 'my projest push'
+```
+
+```bash
+git pull origin master
 ```
 
 注意这里的add后面还有个“.”，小点的意识是选择所有文件进行上传，不能忽略
