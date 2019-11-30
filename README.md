@@ -8,4 +8,5 @@
 * Database
 * Java
 * Linux
+* Python
 * Web
