@@ -1,0 +1,155 @@
+一、安装zsh
+	sudo apt-get install zsh
+二、把默认的Shell改成zsh
+	chsh -s /bin/zsh
+三、安装Git
+	sudo apt-get install git
+四、安装curl
+	sudo apt install curl
+五、安装 oh-my-zsh
+	sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+六、更改主题
+	vim .zshrc
+	改成：agnoster
+	source .zshrc
+七、安装插件
+	安装 zsh-autosuggestions
+	
+		方式1: 
+		# 下载到本地
+		git clone git://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
+
+		# 添加到.zshrc, 这样就不用每次source了
+		添加 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh 到 .zshrc 尾部
+		plugins=() 中添加上 zsh-autosuggestions, 用空格隔开即可
+
+		========================================================================================
+		方式2: 官方建议
+		# 少了添加source到 ~/.zshrc这一步, 猜想是会按照默认的路径加载? 
+
+		# 1.Clone this repository into $ZSH_CUSTOM/plugins (by default ~/.oh-my-zsh/custom/plugins)
+		git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+		# 2.Add the plugin to the list of plugins for Oh My Zsh to load:
+		plugins=(zsh-autosuggestions)
+
+		# 3.Start a new terminal session.
+
+    安装 autojump
+    
+        # 下载到本地
+        git clone git://github.com/joelthelion/autojump.git
+
+        # 执行安装脚本
+        cd autojump
+        ./install.py
+
+        # 安装完成在~/下面有.autojump目录, 在.zshrc中加一句
+        [[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && . ~/.autojump/etc/profile.d/autojump.sh
+
+        # 接下来可以愉悦的使用 j 了
+
+    安装 zsh-syntax-highlighting
+    
+        # 到 ~/.zshrc 目录, 克隆仓库
+        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
+
+        # source the script 到 ~/.zshrc
+        echo "source ${(q-)PWD}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc
+
+        # 在当前 shell生效
+        source ./zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+        
+    安装incr命令自动补全插件
+        下载：https://mimosa-pudica.net/zsh-incremental.html
+        放到oh-my-zsh的插件库中，在plugins下创建incr文件夹，放进去
+            ~/.oh-my-zsh/plugins/incr/incr-0.2.zsh
+
+        修改.zshrc文件，在.zshrc文件中添加：
+        source ~/.oh-my-zsh/plugins/incr/incr*.zsh
+
+八、终端显示乱码
+
+    wget https://raw.githubusercontent.com/powerline/powerline/develop/font/10-powerline-symbols.conf
+
+    wget https://raw.githubusercontent.com/powerline/powerline/develop/font/PowerlineSymbols.otf
+
+    sudo mkdir /usr/share/fonts/OTF
+
+    sudo cp 10-powerline-symbols.conf /usr/share/fonts/OTF/
+
+    sudo mv 10-powerline-symbols.conf /etc/fonts/conf.d/
+
+    sudo mv PowerlineSymbols.otf /usr/share/fonts/OTF/
+
+九、配置nvim
+    首先：     ln -s ~/.vim .config/nvim
+             ln -s ~/.vimrc .config/nvim/init.vim
+     下载插件管理器：vim-plug
+     curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+     
+安装软件：
+    anaconda：网址   https://www.anaconda.com/distribution/#download-section
+        bash Anaconda3-2020.02-Linux-x86_64.sh
+        下面一直yes就行了
+        启动：
+            source ~/anaconda3/bin/activate root
+            anaconda-navigator
+            
+            
+            主题：jt -t monokai -f roboto -nf robotosans -tf robotosans -N -T -cellw 70% -dfs 10 -ofs 10
+
+    
+    vmware：网址   https://www.vmware.com/products/workstation-pro/workstation-pro-evaluation.html
+     修改文件权限
+
+        chmod 777 VMware-Workstation-Full-12.5.9-7535481.x86_64.bundle
+
+     执行安装命令
+
+        sudo ./VMware-Workstation-Full-12.5.9-7535481.x86_64.bundle
+    
+    vscode 去官网下载
+    
+    Clibre下载：网址 https://calibre-ebook.com/download_linux
+        curl -L https://calibre-ebook.com/dist/src | tar xvJ 
+        cd calibre*
+        sudo python setup.py install
+    
+解决网页视频无法播放：
+    sudo apt-get update
+    sudo apt-get install flashplugin-installer
+
+
+双系统时间问题
+	linux版：timedatectl set-local-rtc 1 --adjust-system-clock
+	
+安装tlp省电工具：
+    sudo add-apt-repository ppa:linrunner/tlp
+    sudo apt update
+    sudo apt install tlp tlp-rdw preload
+    sudo tlp start 
+    
+    成功安装 TLP 后，使用以下命令启动服务。
+    systemctl start tlp.service
+    显示电池信息
+    sudo tlp-stat -b 
+    显示磁盘信息
+    sudo tlp-stat -d 
+    显示 PCI 设备信息
+    sudo tlp-stat -e 
+    显示图形卡信息
+    sudo tlp-stat -g 
+    显示处理器信息
+    sudo tlp-stat -p 
+    显示系统数据信息
+    sudo tlp-stat -s 
+    显示温度和风扇速度信息
+    sudo tlp-stat -t 
+    显示 USB 设备数据信息
+    sudo tlp-stat -u 
+    显示警告信息
+    sudo tlp-stat -w 
+
+
+	
